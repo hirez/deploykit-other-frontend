@@ -1,0 +1,35 @@
+---
+# Anatomy of an entry:
+#
+# The redirector:
+#   filter: class_filter
+#   payload: redirect1
+#   repo: redirect1
+#   tags: 10
+#   repo_type: git
+#
+# The entry heading is free text, inasmuch as a text can be said to be free, given it exists within
+# and refers to consensus reality.
+#
+# 'filter' can be one of 'identity_filter' ( -I on the commandline), 'class_filter' ( -C) or 
+# 'fact_filter' (-F, I think) and 'payload' is the thing you're filtering on. Mucking around with
+# mco find will be helpful here. 
+#
+# 'repo' is the name of the repository to inspect, which should be the same name as used in Gitlab, less the namespacing.
+# 'tags' is the number of git tags and git branches to display in the drop-down. 
+# 'repo_type' can be either 'git' or 'svn'. I've largely forgotten how the svn bits work.
+#
+
+An example site:
+  filter: identity_filter
+  payload: '/tessen|lazon|ledonia|brax/'
+  repo: example_repo
+  tags: 10
+  repo_type: git
+
+A different site:
+  filter: fact_filter
+  payload: sitetype_externalfact=live
+  repo: different_repo
+  tags: 10
+  repo_type: git
