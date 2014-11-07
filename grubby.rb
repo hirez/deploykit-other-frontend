@@ -1,13 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
-#require 'bundler/setup'
-
-require 'sinatra'
-require 'yaml'
-require 'mcollective'
-require 'syslog'
-
 include MCollective::RPC
 
 enable :sessions
@@ -218,7 +210,19 @@ def site_deploy
     end
   end
 
+  # Send the deployment info to metrics (using locally running Ganglia gmon daemon)
+  metrics_tag = @tag.split('/')[-1].slugify_trim.gsub('-', '_') # Use only the last part
+  metrics_site = @site.slugify_trim.gsub('-', '_')
+  Ganglia::GMetric.send('127.0.0.1', 8649, {
+      :name => "deploy.#{metrics_site}.#{metrics_tag}",
+      :type => 'uint8',
+      :value => 1,
+      :tmax => 60,
+      :dmax => 300
+  })
+
   erb :results
+
 end
 
 get '/' do
