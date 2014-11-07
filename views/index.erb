@@ -50,7 +50,7 @@
         <div class="control-group">
           <label for="grubbysite"> <h3> Site </h3> </label>
           <select name="grubbysite">
-            <% Deploylist.each do |site,junk| %>
+            <% $deploylist.each do |site,junk| %>
               <%= "<option value=\"#{site}\">#{site}</option>" %>
             <% end %>
           </select>
